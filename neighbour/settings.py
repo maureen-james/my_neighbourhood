@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'neighbourhood',
     'cloudinary',
     'bootstrap4',
+    'registration',
 
 ]
 
