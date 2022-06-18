@@ -58,14 +58,14 @@ def signup(request):
             form.save()
             email = form.cleaned_data.get('email')
             name = form.cleaned_data.get('username')
-            send_an_mail(
-            'Welcome to Neighbourhood App.',
-            f'Hello {name},\n '
-            'Welcome to Neighbourhood App and have fun.',
-            'nyururukelvin99@gmail.com@gmail.com',
-            [email],
-            fail_silently=False,
-            )
+            # # send_an_mail(
+            # 'Welcome to Neighbourhood App.',
+            # f'Hello {name},\n '
+            # 'Welcome to Neighbourhood App and have fun.',
+            # 'nyururukelvin99@gmail.com@gmail.com',
+            # [email],
+            # fail_silently=False,
+            # )
         return redirect('index')
     else:
         form = SignUpForm()
