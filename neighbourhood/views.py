@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 
 
 def welcome(request):
-    return render(request, 'index.html')
+    return render(request, 'welcome.html')
 
 
 # Create your views here.
@@ -41,35 +41,35 @@ def index(request):
     else:
         form = CommentForm()
 
-    return render(request, 'temps/index.html', {'profile':profile,'posts': posts, 'form':form,'comments':comments})
+    return render(request, 'index.html', {'profile':profile,'posts': posts, 'form':form,'comments':comments})
 
-def about(request):
-    return render(request, 'temps/about_us.html')
+# def about(request):
+#     return render(request, 'temps/about_us.html')
 
 @login_required
 def contacts(request):
-    return render(request,'temps/contacts.html')
+    return render(request,'contacts.html')
 
-def signup(request):
-    name = "Sign Up"
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            email = form.cleaned_data.get('email')
-            name = form.cleaned_data.get('username')
-            # # send_an_mail(
-            # 'Welcome to Neighbourhood App.',
-            # f'Hello {name},\n '
-            # 'Welcome to Neighbourhood App and have fun.',
-            # 'nyururukelvin99@gmail.com@gmail.com',
-            # [email],
-            # fail_silently=False,
-            # )
-        return redirect('index')
-    else:
-        form = SignUpForm()
-    return render(request, 'registration/registration_form.html', {'form': form, 'name':name})
+# def signup(request):
+#     name = "Sign Up"
+#     if request.method == 'POST':
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             email = form.cleaned_data.get('email')
+#             name = form.cleaned_data.get('username')
+#             send_an_mail(
+#             'Welcome to Neighbourhood App.',
+#             f'Hello {name},\n '
+#             'Welcome to Neighbourhood App and have fun.',
+#             'ma@gmail.com@gmail.com',
+#             [email],
+#             fail_silently=False,
+#             )
+#         return redirect('index')
+#     else:
+#         form = SignUpForm()
+#     return render(request, 'registration/registration_form.html', {'form': form, 'name':name})
 
 @login_required
 def search_business(request):
@@ -86,7 +86,7 @@ def search_business(request):
 
     else:
         message = "You haven't searched for any term"
-        return render(request, 'temps/search.html', {"message": message})
+        return render(request, 'search.html', {"message": message})
 
 @login_required
 def edit_profile(request,username):
@@ -113,7 +113,7 @@ def edit_profile(request,username):
             form = UpdateProfile(instance=profile)
         else:
             form = UpdateProfile()
-    return render(request,'temps/edit_profile.html',{"form":form})
+    return render(request,'edit_profile.html',{"form":form})
 
 @login_required
 def post(request):
@@ -142,7 +142,7 @@ def post(request):
     else:
         form=PostForm()
         
-    return render(request,'temps/post.html',{'form':form, 'posts':posts})
+    return render(request,'post.html',{'form':form, 'posts':posts})
 
 @login_required
 def business(request):
@@ -164,7 +164,7 @@ def business(request):
     except:
         businesses = None
 
-    return render(request,'temps/business.html',{"businesses":businesses,"form":form})
+    return render(request,'business.html',{"businesses":businesses,"form":form})
 
 
     
