@@ -19,8 +19,8 @@ from django.contrib.auth import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('',include('neighbourhood.urls')),
-    path('accounts/', include('registration.backends.default.urls')),
+    path('admin/', admin.site.urls),
+    path('accounts/', include('registration.backends.simple.urls')),
     path('logout/', views.LogoutView.as_view (next_page = '/'))
 ]

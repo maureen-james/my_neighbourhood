@@ -26,7 +26,7 @@ class UpdateUser(forms.ModelForm):
 class UpdateProfile(forms.ModelForm):
     class Meta:
         model=Profile
-        fields = ('first_name','last_name','bio','location','neighbourhood','email')
+        fields = ('bio','location','neighbourhood','email','contact')
 
 class BusinessForm(forms.ModelForm):
     class Meta:
@@ -36,7 +36,7 @@ class BusinessForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model=Post
-        fields=['title','post',]
+        fields=['title','post','neighbourhood']
 
 class CommentForm(forms.ModelForm):
     class Meta:

@@ -1,3 +1,4 @@
+from pickle import FALSE
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
@@ -69,11 +70,9 @@ class Neighbourhood(models.Model):
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE,related_name = 'profile')
     profile_photo = CloudinaryField("Profile Image")
-    first_name = models.CharField(max_length = 50,null=True)
-    last_name = models.CharField(max_length = 50,null=True)
     bio = models.TextField(max_length=300)
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,null=True)
-    location = models.ForeignKey(Location,on_delete = models.CASCADE,null=True)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,related_name='neighbourhood',null=True,)
+    location = models.ForeignKey(Location,related_name='location', on_delete = models.CASCADE,null=True)
     email = models.EmailField(max_length=60, blank=True)
     contact = models.CharField(max_length=100, blank=True)
     

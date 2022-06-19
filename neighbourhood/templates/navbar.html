@@ -16,11 +16,26 @@
 <body> 
   <div class="row">
     <div class="col-md-12">
-      <nav class="navbar fixed-top" style="background-color: rgb(172, 24, 73);">
+      <nav class="navbar fixed-top" style="background-color: rgb(225, 175, 192);">
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand" href="{% url 'welcome' %}">NEIGHBOURHOOD</a>
             
+              <a  href="/user/{{request.user.id}}">Profile</a>
+            
+            {% if user.is_authenticated %}
+            
+              <a  href="/accounts/logout/">Logout</a>
+            
+    
+            {% else %}
+            
+              <a href="/accounts/login/">Login</a>
+         
+            
+              <a  href="/accounts/register/">Sign up</a>
+            
+            {% endif %}
             <a href="{% url 'business' %}">Businesses Around ~</a>
             <a href="{% url 'contacts' %}" class="modal-trigger">Emergency Contacts</a>
           </div>
@@ -39,7 +54,8 @@
             </form>
           </div>
           <!-- search form end -->
-          <a class="right" href="{% url 'edit_profile' user.username %}" style="margin: 10px;"><img src="{% static 'images/images.jpeg' %}" alt="" style="height: 30px; width: 30px; border-radius: 30px;"></a>
+          <a class="right" href="{% url 'edit_profile' %}" style="margin: 10px;">
+            <img src="{% static 'images/images.jpeg' %}" alt="" style="height: 30px; width: 30px; border-radius: 30px;"></a>
           <a style="color: black; padding-left: 15px; " href="/logout"><i class="fa fa-sign-out" style="font-size:24px; color: white;"></i></a>
           <div class="item has-tablet" id="bt-submit"><a href="{% url 'post' %}" class="button"><span>POST</span></a></div>
         </div>

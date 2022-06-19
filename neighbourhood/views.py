@@ -15,7 +15,7 @@ def welcome(request):
 
 
 # Create your views here.
-@login_required
+@login_required(login_url='/accounts/login/')
 def index(request):
     # Default view
     comments = Comment.get_comments()
@@ -43,6 +43,44 @@ def index(request):
 
     return render(request, 'index.html', {'profile':profile,'posts': posts, 'form':form,'comments':comments})
 
+
+@login_required(login_url='/accounts/login/')
+def profile(request, user_id):
+
+    current_user=get_object_or_404(User,id=user_id)
+    # current_user = request.user
+    
+    profile = Profile.objects.filter(id = current_user.id).first()
+    
+    
+    return render(request, 'profile.html', {"profile": profile})
+
+# @login_required(login_url='/accounts/login/')
+# def profile(request):
+#     posts=Post.objects.all()
+#     current_user = request.user
+#     if request.method == 'POST':
+#         form = UpdateProfile(request.POST, request.FILES)
+#         form1 = PostForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             profile = form.save(commit=False)
+#             profile.user = current_user
+#             profile.save()
+
+#         if form1.is_valid():
+#             post = form1.save(commit=False)
+#             post.profile = current_user.profile
+#             post.save()
+
+#         return redirect('profile')
+
+#     else:
+#         form = UpdateProfile()
+#         form1 = PostForm()
+    
+#     return render(request, 'profile.html', {"form":form,"form1":form1,"posts":posts})
+
+
 # def about(request):
 #     return render(request, 'temps/about_us.html')
 
@@ -58,14 +96,7 @@ def contacts(request):
 #             form.save()
 #             email = form.cleaned_data.get('email')
 #             name = form.cleaned_data.get('username')
-#             send_an_mail(
-#             'Welcome to Neighbourhood App.',
-#             f'Hello {name},\n '
-#             'Welcome to Neighbourhood App and have fun.',
-#             'ma@gmail.com@gmail.com',
-#             [email],
-#             fail_silently=False,
-#             )
+
 #         return redirect('index')
 #     else:
 #         form = SignUpForm()
@@ -89,7 +120,7 @@ def search_business(request):
         return render(request, 'search.html', {"message": message})
 
 @login_required
-def edit_profile(request,username):
+def edit_profile(request):
     current_user = request.user
     if request.method == 'POST':
         try:
@@ -115,34 +146,54 @@ def edit_profile(request,username):
             form = UpdateProfile()
     return render(request,'edit_profile.html',{"form":form})
 
-@login_required
-def post(request):
+# @login_required
+# def post(request):
 
-    current_user=request.user
+#     current_user=request.user
 
-    try:
-        profile = Profile.objects.get(user = current_user)
-    except:
-        return redirect('edit_profile',username = current_user.username)
+#     try:
+#         profile = Profile.objects.get(user = current_user)
+#     except:
+#         return redirect('edit_profile',username = current_user.username)
 
-    try:
-        posts = Post.objects.filter(neighbourhood = profile.neighbourhood)
-    except:
-        posts = None
+#     try:
+#         posts = Post.objects.filter(neighbourhood = profile.neighbourhood)
+#     except:
+#         posts = None
 
-    if request.method=='POST':
-        form=PostForm(request.POST,request.FILES)
-        if form.is_valid():
-            post=form.save(commit=False)
-            post.user=current_user
-            post.neighbourhood = profile.neighbourhood
-            post.save()
-        return redirect('index')
+#     if request.method=='POST':
+#         form=PostForm(request.POST,request.FILES)
+#         if form.is_valid():
+#             post=form.save(commit=False)
+#             post.user=current_user
+#             post.neighbourhood = profile.neighbourhood
+#             post.save()
+#         return redirect('index')
     
-    else:
-        form=PostForm()
+#     else:
+#         form=PostForm()
         
-    return render(request,'post.html',{'form':form, 'posts':posts})
+#     return render(request,'post.html',{'form':form, 'posts':posts})
+
+@login_required(login_url='/accounts/login/')
+def post(request):
+    
+    current_user = request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.profile = current_user.profile
+            post.save()
+
+        return redirect('profile')
+
+    else:
+        form = PostForm()
+    
+    return render(request, 'post.html', {"form":form})
 
 @login_required
 def business(request):
