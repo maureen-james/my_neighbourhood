@@ -18,10 +18,10 @@ def index(request):
     # Default view
     comments = Comment.get_comments()
     current_user = request.user
-    # try:
-    #     profile = Profile.objects.get(user = current_user)
-    # except:
-    #     return redirect('edit_profile')
+    try:
+        profile = Profile.objects.get(user = current_user)
+    except:
+        return redirect('edit_profile')
 
     try:
         posts = Post.objects.filter(neighbourhood = profile.neighbourhood)
