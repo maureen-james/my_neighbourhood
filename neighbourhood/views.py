@@ -176,19 +176,19 @@ def edit_profile(request):
 #     return render(request,'post.html',{'form':form, 'posts':posts})
 
 @login_required(login_url='/accounts/login/')
-def post(request):
+def add_post(request):
     
-    current_user = request.user
+    
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
 
 
         if form.is_valid():
             post = form.save(commit=False)
-            post.profile = current_user.profile
+        
             post.save()
 
-        return redirect('profile')
+        return redirect('index')
 
     else:
         form = PostForm()

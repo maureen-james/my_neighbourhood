@@ -71,7 +71,7 @@ class Profile(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE,related_name = 'profile')
     profile_photo = CloudinaryField("Profile Image")
     bio = models.TextField(max_length=300)
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,related_name='neighbourhood',null=True,)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,related_name='neighbourhood',default='')
     location = models.ForeignKey(Location,related_name='location', on_delete = models.CASCADE,null=True)
     email = models.EmailField(max_length=60, blank=True)
     contact = models.CharField(max_length=100, blank=True)
@@ -84,7 +84,7 @@ class Business(models.Model):
     name =models.CharField(max_length=60)
     description = models.CharField(max_length = 150,null=True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE,null=True)
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,related_name = 'business_neighbourhood')
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,related_name = 'business_neighbourhood',null=True)
     email =models.EmailField(max_length=60, blank=True)
 
     def __str__(self):
@@ -108,7 +108,7 @@ class Post(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     title=models.CharField(max_length=60)
     post=models.TextField()
-    neighbourhood = models.ForeignKey(Neighbourhood,on_delete = models.CASCADE,null=True)
+    neighbourhood = models.ForeignKey(Neighbourhood,on_delete = models.CASCADE,default='')
     posted=models.DateTimeField(auto_now_add=True) 
     
 

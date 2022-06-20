@@ -14,7 +14,7 @@ urlpatterns=[
     path('user/<user_id>', views.profile, name='profile'),
     path('user/edit_profile/profile', views.edit_profile, name='edit_profile'),
     path('logout/', LogoutView.as_view(next_page='login_url'), name='logout_url'),
-    path('post',views.post,name='post'),
+    path('post',views.add_post,name='post'),
     path('search/', views.search_business, name='search'),
     path('business',views.business,name = 'business'),
     path('accounts/profile/', views.profile, name='profile'),
