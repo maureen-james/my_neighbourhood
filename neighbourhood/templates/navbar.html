@@ -2,7 +2,7 @@
 {% load static%}
 {% block styles %}
   {% bootstrap_css %}
-  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
@@ -16,12 +16,12 @@
 <body> 
   <div class="row">
     <div class="col-md-12">
-      <nav class="navbar fixed-top" style="background-color: rgb(225, 175, 192);">
+      <nav class="navbar fixed-top" style="background-color: rgb(10, 9, 9);">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="{% url 'welcome' %}">NEIGHBOURHOOD</a>
+            <a class="navbar-brand" href="{% url 'index' %}">NEIGHBOURHOOD</a>
             
-              <a  href="/user/{{request.user.id}}">Profile</a>
+              <a  href="/user/">Profile</a>
             
             {% if user.is_authenticated %}
             
@@ -55,7 +55,7 @@
           </div>
           <!-- search form end -->
           <a class="right" href="{% url 'edit_profile' %}" style="margin: 10px;">
-            <img src="{% static 'images/images.jpeg' %}" alt="" style="height: 30px; width: 30px; border-radius: 30px;"></a>
+           
           <a style="color: black; padding-left: 15px; " href="/logout"><i class="fa fa-sign-out" style="font-size:24px; color: white;"></i></a>
           <div class="item has-tablet" id="bt-submit"><a href="{% url 'post' %}" class="button"><span>POST</span></a></div>
         </div>

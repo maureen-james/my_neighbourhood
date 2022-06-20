@@ -7,12 +7,12 @@ from django.urls import path
 
 
 urlpatterns=[
-    path('',views.welcome,name = 'welcome'),
+    path('',views.index,name = 'index'),
     path('contacts',views.contacts, name = 'contacts'),
-    # url(r'^signup', views.signup, name='signup'),
+    path('signup', views.signup, name='signup'),
     path('login', LoginView.as_view(), name='login_url'),
-    path('user/<user_id>', views.profile, name='profile'),
-    path('user/edit_profile/profile', views.edit_profile, name='edit_profile'),
+    path('user/', views.profile, name='profile'),
+    path('user/edit_profile/', views.edit_profile, name='edit_profile'),
     path('logout/', LogoutView.as_view(next_page='login_url'), name='logout_url'),
     path('post',views.add_post,name='post'),
     path('search/', views.search_business, name='search'),
