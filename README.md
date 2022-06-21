@@ -8,12 +8,13 @@ This project is of a web application that allows you to be in the loop about eve
 
 ## User Story  
 
-* A user can view posted projects and their details.  
-* A user can post a project to be rated/reviewed. 
-* A user can rate/ review other users' projects.  
-* Search for projects.  
-* View projects overall score.
-* A user can view their profile page.  
+* Sign in with the application to start using.
+* Set up a profile about me and a general location and my neighborhood name.
+* Find a list of different businesses in my neighborhood.
+* Find Contact Information for the health department and Police authorities  near my neighborhood.
+* Create Posts that will be visible to everyone in my neighborhood.
+* Change My neighborhood when I decide to move out.
+* Only view details of a single neighborhood. 
 
 
 
